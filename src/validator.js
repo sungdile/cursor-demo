@@ -8,7 +8,6 @@ const RFC5322_EMAIL_REGEX =
 
 const MAX_EMAIL_LENGTH = 254;
 const MAX_LOCAL_PART_LENGTH = 64;
-const MAX_DOMAIN_PART_LENGTH = 253;
 
 /**
  * 이메일 문자열이 RFC 5322 형식과 RFC 3696 길이 제한을 만족하는지 검증한다.
@@ -20,9 +19,6 @@ export function isValidEmail(email) {
 
   const atIndex = email.lastIndexOf('@');
   if (atIndex <= 0 || atIndex > MAX_LOCAL_PART_LENGTH) return false;
-
-  const domainLength = email.length - atIndex - 1;
-  if (domainLength <= 0 || domainLength > MAX_DOMAIN_PART_LENGTH) return false;
   if (email.length > MAX_EMAIL_LENGTH) return false;
 
   return RFC5322_EMAIL_REGEX.test(email);
